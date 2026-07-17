@@ -9,7 +9,7 @@ import { useVisualViewport } from '@/hooks/useVisualViewport'
 
 export function ClientLayout({ children }: { children: React.ReactNode }) {
   const isFullscreen = useUIStore((s) => s.isFullscreen)
-  const viewportHeight = useVisualViewport()
+  const { height, offsetTop } = useVisualViewport()
 
   // iOS Safari keyboard bug fix: when an input loses focus, the page might stay scrolled
   useEffect(() => {
@@ -27,7 +27,7 @@ export function ClientLayout({ children }: { children: React.ReactNode }) {
 
 
   return (
-    <div className="fixed inset-0 flex bg-[hsl(225,20%,6%)] flex-col md:flex-row" style={{ height: viewportHeight }}>
+    <div className="fixed left-0 right-0 flex bg-[hsl(225,20%,6%)] flex-col md:flex-row" style={{ height, top: offsetTop }}>
       {/* Left sidebar — navigation */}
       {!isFullscreen && (
         <div className="hidden md:flex">
