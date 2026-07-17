@@ -8,7 +8,7 @@ export function ClientLayout({ children }: { children: React.ReactNode }) {
   const isFullscreen = useUIStore((s) => s.isFullscreen)
 
   return (
-    <div className="flex h-screen overflow-hidden bg-[hsl(225,20%,6%)] flex-col md:flex-row">
+    <div className="flex h-[100dvh] overflow-hidden bg-[hsl(225,20%,6%)] flex-col md:flex-row">
       {/* Left sidebar — navigation */}
       {!isFullscreen && (
         <div className="hidden md:flex">
