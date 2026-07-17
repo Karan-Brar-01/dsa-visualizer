@@ -37,7 +37,7 @@ export function ClientLayout({ children }: { children: React.ReactNode }) {
       {/* Main content area */}
       <div className="flex flex-1 flex-col overflow-hidden w-full">
         {!isFullscreen && <TopBar />}
-        <main className="flex-1 overflow-hidden">
+        <main className="flex flex-col flex-1 overflow-hidden">
           {children}
         </main>
       </div>

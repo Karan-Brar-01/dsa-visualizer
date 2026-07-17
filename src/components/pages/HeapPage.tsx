@@ -50,7 +50,7 @@ export function HeapPage() {
   const isFullscreen = useUIStore((s) => s.isFullscreen)
 
   return (
-    <div className={`flex flex-col ${isFullscreen ? 'flex-1 relative' : 'h-[calc(100dvh-3.5rem)] md:h-full overflow-y-auto md:overflow-hidden'}`}>
+    <div className={`flex flex-col ${isFullscreen ? 'flex-1 relative h-full w-full' : 'h-[calc(100dvh-3.5rem)] md:h-full overflow-y-auto md:overflow-hidden'}`}>
       {/* Top Controls Bar */}
       <header
         className={
