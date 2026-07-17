@@ -20,9 +20,9 @@ export function SortingOperationPanel({ algorithm }: { algorithm: SortAlgorithm 
   return (
     <div className="flex items-center gap-3 flex-wrap" aria-label="Sorting controls">
       {/* Array size picker */}
-      <div className="flex items-center gap-1">
+      <div className="flex items-center gap-0.5 md:p-1">
         <span className="text-xs text-[hsl(210,8%,50%)] font-mono">n =</span>
-        <div className="flex items-center gap-0.5 rounded-xl border border-[hsl(225,12%,20%)] bg-[hsl(225,18%,10%)] p-1">
+        <div className="flex items-center gap-0.5 rounded-xl border border-[hsl(225,12%,20%)] bg-[hsl(225,18%,10%)] p-0.5 md:p-1">
           {SIZE_OPTIONS.map((s) => (
             <button
               key={s}
@@ -30,7 +30,7 @@ export function SortingOperationPanel({ algorithm }: { algorithm: SortAlgorithm 
               type="button"
               onClick={() => actions.setArraySize(s)}
               disabled={isPlaying}
-              className={`min-h-[44px] md:min-h-0 md:h-7 px-4 md:px-2.5 rounded-lg text-sm md:text-xs font-mono font-medium transition-all disabled:opacity-40 ${
+              className={`min-h-[36px] md:min-h-0 md:h-7 px-2.5 rounded-lg text-xs md:text-xs font-mono font-medium transition-all disabled:opacity-40 ${
                 arraySize === s
                   ? `${accentClass} text-white border-transparent`
                   : 'text-[hsl(210,8%,55%)] hover:text-[hsl(210,12%,75%)]'
@@ -48,7 +48,7 @@ export function SortingOperationPanel({ algorithm }: { algorithm: SortAlgorithm 
         type="button"
         onClick={actions.generateArray}
         disabled={isPlaying}
-        className="min-h-[44px] md:min-h-0 md:h-8 px-4 md:px-3 text-sm md:text-xs rounded-lg text-xs text-[hsl(210,8%,50%)] border border-[hsl(225,12%,22%)] bg-[hsl(225,16%,11%)] hover:text-[hsl(210,12%,70%)] hover:border-[hsl(225,10%,30%)] disabled:opacity-40 transition-colors"
+        className="min-h-[36px] md:min-h-0 md:h-8 px-4 md:px-3 text-xs md:text-xs rounded-lg text-xs text-[hsl(210,8%,50%)] border border-[hsl(225,12%,22%)] bg-[hsl(225,16%,11%)] hover:text-[hsl(210,12%,70%)] hover:border-[hsl(225,10%,30%)] disabled:opacity-40 transition-colors"
       >
         ⚄ Shuffle
       </button>
@@ -58,7 +58,7 @@ export function SortingOperationPanel({ algorithm }: { algorithm: SortAlgorithm 
         id={`${id}-run`}
         type="button"
         onClick={actions.runSort}
-        className={`min-h-[44px] md:min-h-0 md:h-8 px-5 md:px-4 text-sm md:text-xs rounded-lg text-sm font-semibold text-white transition-all ${accentClass}`}
+        className={`min-h-[36px] md:min-h-0 md:h-8 px-5 md:px-4 text-xs md:text-xs rounded-lg text-xs font-semibold text-white transition-all ${accentClass}`}
       >
         Sort!
       </button>
@@ -69,7 +69,7 @@ export function SortingOperationPanel({ algorithm }: { algorithm: SortAlgorithm 
         type="button"
         onClick={actions.reset}
         disabled={isPlaying}
-        className="min-h-[44px] md:min-h-0 md:h-8 px-4 md:px-3 text-sm md:text-xs rounded-lg text-xs text-[hsl(210,8%,50%)] border border-[hsl(225,12%,22%)] bg-[hsl(225,16%,11%)] hover:text-[hsl(210,12%,70%)] hover:border-[hsl(225,10%,30%)] disabled:opacity-40 transition-colors"
+        className="min-h-[36px] md:min-h-0 md:h-8 px-4 md:px-3 text-xs md:text-xs rounded-lg text-xs text-[hsl(210,8%,50%)] border border-[hsl(225,12%,22%)] bg-[hsl(225,16%,11%)] hover:text-[hsl(210,12%,70%)] hover:border-[hsl(225,10%,30%)] disabled:opacity-40 transition-colors"
       >
         Reset
       </button>

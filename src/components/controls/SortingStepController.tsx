@@ -41,22 +41,22 @@ export function SortingStepController({ algorithm }: { algorithm: SortAlgorithm 
         )}
       </AnimatePresence>
       {hasSteps && (
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1 md:gap-2">
           <div className="relative w-24 h-1.5 rounded-full bg-[hsl(225,14%,20%)] overflow-hidden">
             <motion.div className={`absolute inset-y-0 left-0 rounded-full ${accentColor}`} animate={{ width: `${progress}%` }} transition={{ duration: 0.1 }} />
           </div>
           <span className="text-xs font-mono tabular-nums text-[hsl(210,8%,45%)] w-16 text-right">{currentStepIndex + 1} / {totalSteps}</span>
         </div>
       )}
-      <button onClick={stepBack} disabled={!hasSteps || currentStepIndex === 0} className="min-h-[44px] w-12 md:min-h-0 md:h-8 md:w-8 rounded-lg flex items-center justify-center text-sm border border-[hsl(225,12%,22%)] bg-[hsl(225,16%,11%)] text-[hsl(210,12%,60%)] hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-all">←</button>
+      <button onClick={stepBack} disabled={!hasSteps || currentStepIndex === 0} className="min-h-[36px] w-12 md:min-h-0 md:h-8 md:w-8 rounded-lg flex items-center justify-center text-xs border border-[hsl(225,12%,22%)] bg-[hsl(225,16%,11%)] text-[hsl(210,12%,60%)] hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-all">←</button>
       <motion.button onClick={isPlaying ? pause : play} disabled={!hasSteps && !isPlaying} whileTap={{ scale: 0.92 }}
-        className={`min-h-[44px] md:min-h-0 md:h-8 px-5 md:px-4 text-sm md:text-xs rounded-lg text-sm font-semibold flex items-center gap-2 border transition-all disabled:opacity-30 disabled:cursor-not-allowed ${isPlaying ? accentTextActive : accentTextIdle}`}>
+        className={`min-h-[36px] md:min-h-0 md:h-8 px-5 md:px-4 text-xs md:text-xs rounded-lg text-xs font-semibold flex items-center gap-1 md:gap-2 border transition-all disabled:opacity-30 disabled:cursor-not-allowed ${isPlaying ? accentTextActive : accentTextIdle}`}>
         <motion.span key={isPlaying ? 'pause' : 'play'} initial={{ opacity: 0, scale: 0.7 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.1 }}>
           {isPlaying ? '⏸' : '▶'}
         </motion.span>
         {isPlaying ? 'Pause' : 'Play'}
       </motion.button>
-      <button onClick={stepForward} disabled={!hasSteps} className="min-h-[44px] w-12 md:min-h-0 md:h-8 md:w-8 rounded-lg flex items-center justify-center text-sm border border-[hsl(225,12%,22%)] bg-[hsl(225,16%,11%)] text-[hsl(210,12%,60%)] hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-all">→</button>
+      <button onClick={stepForward} disabled={!hasSteps} className="min-h-[36px] w-12 md:min-h-0 md:h-8 md:w-8 rounded-lg flex items-center justify-center text-xs border border-[hsl(225,12%,22%)] bg-[hsl(225,16%,11%)] text-[hsl(210,12%,60%)] hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-all">→</button>
       <div className="h-4 w-px bg-[hsl(225,12%,22%)]" />
       <div className="flex items-center gap-0.5 rounded-lg border border-[hsl(225,12%,20%)] bg-[hsl(225,18%,10%)] p-0.5">
         {SPEED_OPTIONS.map((opt) => (

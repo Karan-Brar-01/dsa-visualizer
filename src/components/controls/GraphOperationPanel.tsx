@@ -35,9 +35,9 @@ export function GraphOperationPanel({ algorithm }: { algorithm: 'bfs' | 'dfs' })
   return (
     <div className="flex items-center gap-3 flex-wrap" aria-label="Graph traversal controls">
       {/* Vertex selector */}
-      <div className="flex items-center gap-1">
+      <div className="flex items-center gap-0.5 md:p-1">
         <span className="text-xs text-[hsl(210,8%,50%)] font-mono">Start:</span>
-        <div className="flex items-center gap-0.5 rounded-xl border border-[hsl(225,12%,20%)] bg-[hsl(225,18%,10%)] p-1">
+        <div className="flex items-center gap-0.5 rounded-xl border border-[hsl(225,12%,20%)] bg-[hsl(225,18%,10%)] p-0.5 md:p-1">
           {VERTICES.map((v) => (
             <button
               key={v}
@@ -63,7 +63,7 @@ export function GraphOperationPanel({ algorithm }: { algorithm: 'bfs' | 'dfs' })
         type="button"
         onClick={handleRun}
         className={`
-          min-h-[44px] md:min-h-0 md:h-8 px-5 md:px-4 text-sm md:text-xs rounded-lg text-sm font-semibold text-white
+          min-h-[36px] md:min-h-0 md:h-8 px-5 md:px-4 text-xs md:text-xs rounded-lg text-xs font-semibold text-white
           transition-all
           ${ACCENT_BUTTON[algorithm]}
         `}
@@ -78,7 +78,7 @@ export function GraphOperationPanel({ algorithm }: { algorithm: 'bfs' | 'dfs' })
         onClick={actions.reset}
         disabled={isPlaying}
         className="
-          min-h-[44px] md:min-h-0 md:h-8 px-4 md:px-3 text-sm md:text-xs rounded-lg text-xs text-[hsl(210,8%,50%)]
+          min-h-[36px] md:min-h-0 md:h-8 px-4 md:px-3 text-xs md:text-xs rounded-lg text-xs text-[hsl(210,8%,50%)]
           border border-[hsl(225,12%,22%)] bg-[hsl(225,16%,11%)]
           hover:text-[hsl(210,12%,70%)] hover:border-[hsl(225,10%,30%)]
           disabled:opacity-40 transition-colors

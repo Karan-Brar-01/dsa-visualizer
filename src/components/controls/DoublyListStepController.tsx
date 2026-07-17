@@ -54,7 +54,7 @@ export function DoublyListStepController() {
 
       {/* Progress bar + counter */}
       {hasSteps && (
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1 md:gap-2">
           {/* Progress bar */}
           <div className="relative w-20 h-1.5 rounded-full bg-[hsl(225,14%,20%)] overflow-hidden">
             <motion.div
@@ -77,7 +77,7 @@ export function DoublyListStepController() {
         disabled={!hasSteps || currentStepIndex === 0}
         aria-label="Step backward"
         className="
-          min-h-[44px] w-12 md:min-h-0 md:h-8 md:w-8 rounded-lg flex items-center justify-center text-sm
+          min-h-[36px] w-12 md:min-h-0 md:h-8 md:w-8 rounded-lg flex items-center justify-center text-xs
           border border-[hsl(225,12%,22%)] bg-[hsl(225,16%,11%)]
           text-[hsl(210,12%,60%)] hover:text-white hover:border-[hsl(225,10%,32%)]
           disabled:opacity-30 disabled:cursor-not-allowed transition-all
@@ -94,7 +94,7 @@ export function DoublyListStepController() {
         aria-label={isPlaying ? 'Pause' : 'Play'}
         whileTap={{ scale: 0.92 }}
         className={`
-          min-h-[44px] md:min-h-0 md:h-8 px-5 md:px-4 text-sm md:text-xs rounded-lg text-sm font-semibold flex items-center gap-2
+          min-h-[36px] md:min-h-0 md:h-8 px-5 md:px-4 text-xs md:text-xs rounded-lg text-xs font-semibold flex items-center gap-1 md:gap-2
           border transition-all
           disabled:opacity-30 disabled:cursor-not-allowed
           ${isPlaying
@@ -120,7 +120,7 @@ export function DoublyListStepController() {
         disabled={!hasSteps}
         aria-label="Step forward"
         className="
-          min-h-[44px] w-12 md:min-h-0 md:h-8 md:w-8 rounded-lg flex items-center justify-center text-sm
+          min-h-[36px] w-12 md:min-h-0 md:h-8 md:w-8 rounded-lg flex items-center justify-center text-xs
           border border-[hsl(225,12%,22%)] bg-[hsl(225,16%,11%)]
           text-[hsl(210,12%,60%)] hover:text-white hover:border-[hsl(225,10%,32%)]
           disabled:opacity-30 disabled:cursor-not-allowed transition-all

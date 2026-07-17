@@ -57,16 +57,16 @@ export function AVLPage() {
   }, [isPlaying, play, pause, stepForward, stepBack, steps])
 
   return (
-    <div className={`flex flex-col ${isFullscreen ? 'flex-1 relative h-full w-full' : 'h-[calc(100dvh-3.5rem)] md:h-full overflow-y-auto md:overflow-hidden'}`}>
+    <div className={`flex flex-col ${isFullscreen ? 'flex-1 min-h-0 w-full relative' : 'h-[calc(100dvh-3.5rem)] md:h-full overflow-y-auto md:overflow-hidden'}`}>
       {/* Top Controls Bar */}
       <header
         className={
           isFullscreen
-            ? 'absolute bottom-4 pb-[env(safe-area-inset-bottom)] left-0 right-0 z-50 flex flex-col items-center justify-center px-4 pointer-events-none'
+            ? 'flex-shrink-0 z-50 flex flex-col items-center justify-center px-2 pb-[calc(0.5rem+env(safe-area-inset-bottom))] pt-2 w-full'
             : 'flex-shrink-0 border-b border-[hsl(225,12%,18%)] bg-[hsl(225,18%,10%)] px-4 py-2 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 z-10'
         }
       >
-        <div className={isFullscreen ? 'flex flex-col md:flex-row items-center justify-center gap-2 bg-[hsl(225,18%,10%)]/80 backdrop-blur-md rounded-2xl p-3 shadow-2xl border border-[hsl(225,12%,25%)] pointer-events-auto max-h-[250px] overflow-y-auto w-full max-w-[90vw]' : 'w-full flex flex-col md:flex-row items-start md:items-center justify-between gap-4'}>
+        <div className={isFullscreen ? 'flex flex-col md:flex-row items-center justify-center gap-1.5 bg-[hsl(225,18%,10%)]/95 backdrop-blur-md rounded-xl p-2 shadow-2xl border border-[hsl(225,12%,25%)] w-full max-w-[95vw] max-h-[30vh] overflow-y-auto' : 'w-full flex flex-col md:flex-row items-start md:items-center justify-between gap-4'}>
           <AVLOperationPanel />
           <AVLStepController />
         </div>

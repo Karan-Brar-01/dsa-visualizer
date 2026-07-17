@@ -94,12 +94,12 @@ export function DoublyListOperationPanel() {
     <form
       id={`${id}-form`}
       onSubmit={handleSubmit}
-      className="flex items-center gap-2 flex-wrap"
+      className="flex items-center gap-1 md:gap-2 flex-wrap"
       aria-label="Linked list operation controls"
     >
       {/* Group tabs */}
       <div
-        className="flex items-center gap-1 rounded-xl border border-[hsl(225,12%,20%)] bg-[hsl(225,18%,10%)] p-1"
+        className="flex items-center gap-0.5 md:p-1 rounded-xl border border-[hsl(225,12%,20%)] bg-[hsl(225,18%,10%)] p-0.5 md:p-1"
         role="tablist"
         aria-label="Operation group"
       >
@@ -129,7 +129,7 @@ export function DoublyListOperationPanel() {
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: 6 }}
           transition={{ duration: 0.12 }}
-          className="flex items-center gap-1 rounded-xl border border-[hsl(225,12%,20%)] bg-[hsl(225,18%,10%)] p-1"
+          className="flex items-center gap-0.5 md:p-1 rounded-xl border border-[hsl(225,12%,20%)] bg-[hsl(225,18%,10%)] p-0.5 md:p-1"
         >
           {groupOps.map((op) => (
             <button
@@ -138,7 +138,7 @@ export function DoublyListOperationPanel() {
               type="button"
               onClick={() => setMode(op.mode)}
               className={`
-                min-h-[44px] md:min-h-0 md:h-7 px-4 md:px-2.5 rounded-lg text-sm md:text-xs font-medium border transition-all
+                min-h-[36px] md:min-h-0 md:h-7 px-2.5 rounded-lg text-xs md:text-xs font-medium border transition-all
                 disabled:opacity-40 disabled:cursor-not-allowed
                 ${mode === op.mode
                   ? `${ACCENT_BUTTON[op.accent]} text-white border-transparent`
@@ -160,7 +160,7 @@ export function DoublyListOperationPanel() {
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.1 }}
-          className="flex items-center gap-2"
+          className="flex items-center gap-1 md:gap-2"
         >
           {currentOp?.needsIndex && (
             <input
@@ -173,7 +173,7 @@ export function DoublyListOperationPanel() {
               onChange={(e) => setIndex(e.target.value)}
               required
               className="
-                min-h-[44px] md:min-h-0 md:h-8 w-20 md:w-16 text-sm md:text-xs rounded-lg border border-[hsl(225,12%,24%)]
+                min-h-[36px] md:min-h-0 md:h-8 w-20 md:w-16 text-xs md:text-xs rounded-lg border border-[hsl(225,12%,24%)]
                 bg-[hsl(225,16%,12%)] text-[hsl(210,20%,92%)]
                 px-2.5 text-xs font-mono
                 focus:outline-none focus:ring-1 focus:ring-violet-500/60
@@ -184,7 +184,7 @@ export function DoublyListOperationPanel() {
           )}
 
           {currentOp?.needsValue && (
-            <div className="flex items-center gap-1">
+            <div className="flex items-center gap-0.5 md:p-1">
               <input
                 id={`${id}-value`}
                 type="number"
@@ -207,10 +207,10 @@ export function DoublyListOperationPanel() {
                 onClick={handleRandomize}
                 title="Random value"
                 className="
-                  min-h-[44px] w-12 md:min-h-0 md:h-8 md:w-8 rounded-lg border border-[hsl(225,12%,24%)]
+                  min-h-[36px] w-12 md:min-h-0 md:h-8 md:w-8 rounded-lg border border-[hsl(225,12%,24%)]
                   bg-[hsl(225,16%,12%)] text-[hsl(210,8%,50%)]
                   hover:text-[hsl(210,12%,75%)] hover:border-[hsl(225,10%,32%)]
-                  text-sm disabled:opacity-40 transition-colors
+                  text-xs disabled:opacity-40 transition-colors
                 "
               >
                 ⚄
@@ -225,7 +225,7 @@ export function DoublyListOperationPanel() {
         id={`${id}-run`}
         type="submit"
         className={`
-          min-h-[44px] md:min-h-0 md:h-8 px-5 md:px-4 text-sm md:text-xs rounded-lg text-sm font-semibold text-white
+          min-h-[36px] md:min-h-0 md:h-8 px-5 md:px-4 text-xs md:text-xs rounded-lg text-xs font-semibold text-white
           disabled:opacity-40 disabled:cursor-not-allowed
           transition-all
           ${ACCENT_BUTTON[currentOp?.accent ?? 'violet']}
@@ -241,7 +241,7 @@ export function DoublyListOperationPanel() {
         onClick={actions.reset}
         disabled={isPlaying}
         className="
-          min-h-[44px] md:min-h-0 md:h-8 px-4 md:px-3 text-sm md:text-xs rounded-lg text-xs text-[hsl(210,8%,50%)]
+          min-h-[36px] md:min-h-0 md:h-8 px-4 md:px-3 text-xs md:text-xs rounded-lg text-xs text-[hsl(210,8%,50%)]
           border border-[hsl(225,12%,22%)] bg-[hsl(225,16%,11%)]
           hover:text-[hsl(210,12%,70%)] hover:border-[hsl(225,10%,30%)]
           disabled:opacity-40 transition-colors
