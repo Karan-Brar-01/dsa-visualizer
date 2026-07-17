@@ -8,7 +8,7 @@ export function useVisualViewport() {
 
     const updateHeight = () => {
       // Use visualViewport.height to get the exact height available above the keyboard
-      setHeight(`${window.visualViewport.height}px`)
+      setHeight(`${window.visualViewport?.height || window.innerHeight}px`)
       // Also reset scroll just in case iOS tried to scroll the layout viewport
       window.scrollTo(0, 0)
     }
