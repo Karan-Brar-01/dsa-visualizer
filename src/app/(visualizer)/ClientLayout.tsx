@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import { Sidebar } from '@/components/layout/Sidebar'
 import { TopBar } from '@/components/layout/TopBar'
 import { useUIStore } from '@/stores/uiStore'
+import { Minimize2 } from 'lucide-react'
 import { useVisualViewport } from '@/hooks/useVisualViewport'
 
 export function ClientLayout({ children }: { children: React.ReactNode }) {
@@ -35,11 +36,22 @@ export function ClientLayout({ children }: { children: React.ReactNode }) {
       )}
 
       {/* Main content area */}
-      <div className="flex flex-1 flex-col overflow-hidden w-full">
+      <div className="flex flex-1 flex-col overflow-hidden w-full relative">
         {!isFullscreen && <TopBar />}
-        <main className="flex flex-col flex-1 overflow-hidden">
+        <main className="flex flex-col flex-1 overflow-hidden relative">
           {children}
         </main>
+        
+        {isFullscreen && (
+          <button
+            onClick={() => useUIStore.getState().toggleFullscreen()}
+            className="absolute top-4 right-4 z-50 flex items-center gap-2 p-2 px-3 md:hidden bg-[hsl(225,18%,10%)]/80 backdrop-blur-md border border-[hsl(225,12%,25%)] rounded-xl text-[hsl(210,8%,65%)] hover:text-white shadow-xl pointer-events-auto transition-colors text-xs font-medium"
+            title="Exit Fullscreen"
+          >
+            <Minimize2 className="w-4 h-4" />
+            Exit Fullscreen
+          </button>
+        )}
       </div>
     </div>
   )
