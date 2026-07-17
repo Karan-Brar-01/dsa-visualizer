@@ -1,0 +1,184 @@
+'use client'
+
+import { motion, AnimatePresence } from 'framer-motion'
+import { useBSTStore, selectors } from '@/stores/bstStore'
+
+const COMPLEXITY_TABLE = [
+  { op: 'Search',      time: 'O(log n)', space: 'O(1)', accent: 'text-green-400' },
+  { op: 'Insert',      time: 'O(log n)', space: 'O(1)', accent: 'text-green-400' },
+  { op: 'Delete',      time: 'O(log n)', space: 'O(1)', accent: 'text-green-400' },
+  { op: 'Worst Case',  time: 'O(n)',     space: 'O(1)', accent: 'text-amber-400' },
+]
+
+const STATE_LEGEND = [
+  { state: 'active',    color: 'hsl(261,82%,65%)', label: 'Traversing' },
+  { state: 'comparing', color: 'hsl(38,92%,60%)',  label: 'Comparing'  },
+  { state: 'mutating',  color: 'hsl(142,72%,52%)', label: 'Mutating'   },
+  { state: 'deleted',   color: 'hsl(0,72%,55%)',   label: 'Deleting'   },
+  { state: 'found',     color: 'hsl(196,90%,55%)', label: 'Found'      },
+]
+
+export function BSTEducationalFooter() {
+  const operationLog     = useBSTStore(selectors.operationLog)
+  const currentStep      = useBSTStore(selectors.currentStep)
+  const listSize         = useBSTStore(selectors.listSize)
+  const snapshot         = useBSTStore(selectors.snapshot)
+  const isPlaying        = useBSTStore(selectors.isPlaying)
+  const currentStepIndex = useBSTStore(selectors.currentStepIndex)
+  const totalSteps       = useBSTStore((s) => s.steps.length)
+
+  const rootValue = snapshot.root
+    ? String(snapshot.nodeMap.get(snapshot.root)?.value ?? '—')
+    : 'null'
+
+  return (
+    <footer
+      className="
+        flex-shrink-0 border-t border-[hsl(225,12%,18%)]
+        bg-[hsl(225,18%,9%)]
+        grid grid-cols-3 divide-x divide-[hsl(225,12%,18%)]
+      "
+      style={{ height: 168 }}
+    >
+      {/* ── Column 1: Operation Log ─────────────────────────────────────────── */}
+      <div className="px-5 py-4 flex flex-col gap-3 overflow-hidden">
+        <div className="flex items-center justify-between flex-shrink-0">
+          <h3 className="text-[10px] font-bold uppercase tracking-widest text-[hsl(210,8%,40%)]">
+            Operation Log
+          </h3>
+          <div className="flex items-center gap-1.5">
+            {isPlaying && (
+              <span className="flex items-center gap-1 text-[9px] text-violet-400 font-mono">
+                <span className="h-1 w-1 rounded-full bg-violet-400 animate-pulse" />
+                animating
+              </span>
+            )}
+            <span className="text-[9px] font-mono text-[hsl(210,8%,35%)]">
+              size: {listSize}
+            </span>
+          </div>
+        </div>
+
+        <ul className="flex flex-col gap-1 overflow-hidden">
+          <AnimatePresence initial={false}>
+            {operationLog.slice(0, 5).map((entry, i) => (
+              <motion.li
+                key={`${entry}-${i}`}
+                initial={{ opacity: 0, x: -8 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.2, delay: i * 0.03 }}
+                className={`text-xs font-mono truncate leading-snug ${
+                  i === 0 ? 'text-[hsl(210,16%,82%)]' : 'text-[hsl(210,8%,40%)]'
+                }`}
+              >
+                <span className="mr-1.5" style={{ color: 'hsl(225,12%,32%)' }}>›</span>
+                {entry}
+              </motion.li>
+            ))}
+          </AnimatePresence>
+        </ul>
+      </div>
+
+      {/* ── Column 2: Current Step ──────────────────────────────────────────── */}
+      <div className="px-5 py-4 flex flex-col gap-3">
+        <div className="flex items-center justify-between flex-shrink-0">
+          <h3 className="text-[10px] font-bold uppercase tracking-widest text-[hsl(210,8%,40%)]">
+            Current Step
+          </h3>
+          {totalSteps > 0 && (
+            <span className="text-[9px] font-mono text-[hsl(210,8%,35%)]">
+              {currentStepIndex + 1} / {totalSteps}
+            </span>
+          )}
+        </div>
+
+        <AnimatePresence mode="wait">
+          {currentStep ? (
+            <motion.div
+              key={currentStep.stepIndex}
+              initial={{ opacity: 0, y: 4 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -4 }}
+              transition={{ duration: 0.15 }}
+              className="flex flex-col gap-2"
+            >
+              <p className="text-xs font-mono text-violet-300 leading-relaxed">
+                {currentStep.description}
+              </p>
+
+              {currentStep.pointerMutation && (
+                <div className="rounded-lg border border-[hsl(225,12%,22%)] bg-[hsl(225,16%,12%)] px-3 py-1.5">
+                  <p className="text-[10px] font-mono text-[hsl(210,8%,50%)]">
+                    <span className="text-amber-400">parent</span>
+                    {' '}[…{currentStep.pointerMutation.sourceId.slice(-4)}]
+                    {' '}<span className="text-[hsl(210,8%,35%)]">→</span>
+                    {' '}{currentStep.pointerMutation.newTargetId
+                      ? <span className="text-violet-400">…{currentStep.pointerMutation.newTargetId.slice(-4)}</span>
+                      : <span className="text-red-400">NULL</span>
+                    }
+                  </p>
+                </div>
+              )}
+
+              {currentStep.highlights.length > 0 && (
+                <div className="flex items-center gap-2 flex-wrap">
+                  {STATE_LEGEND.filter((l) =>
+                    currentStep.highlights.some((h) => h.state === l.state)
+                  ).map((l) => (
+                    <span
+                      key={l.state}
+                      className="flex items-center gap-1 text-[9px] font-mono"
+                      style={{ color: l.color }}
+                    >
+                      <span
+                        className="h-1.5 w-1.5 rounded-full flex-shrink-0"
+                        style={{ background: l.color }}
+                      />
+                      {l.label}
+                    </span>
+                  ))}
+                </div>
+              )}
+            </motion.div>
+          ) : (
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="text-xs text-[hsl(210,8%,38%)]"
+            >
+              Select an operation and press <span className="text-[hsl(210,12%,55%)] font-mono">Run</span> to see step-by-step narration.
+            </motion.p>
+          )}
+        </AnimatePresence>
+      </div>
+
+      {/* ── Column 3: Complexity + Stats ────────────────────────────────────── */}
+      <div className="px-5 py-4 flex flex-col gap-3">
+        <div className="flex items-center justify-between flex-shrink-0">
+          <h3 className="text-[10px] font-bold uppercase tracking-widest text-[hsl(210,8%,40%)]">
+            Complexity
+          </h3>
+          <div className="flex items-center gap-3">
+            <span className="text-[9px] font-mono">
+              <span className="text-[hsl(210,8%,40%)]">root </span>
+              <span className="text-violet-400">{rootValue}</span>
+            </span>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-3 gap-x-3 gap-y-0.5">
+          <span className="text-[9px] text-[hsl(210,8%,32%)] font-semibold">Operation</span>
+          <span className="text-[9px] text-[hsl(210,8%,32%)] font-semibold text-right">Time</span>
+          <span className="text-[9px] text-[hsl(210,8%,32%)] font-semibold text-right">Space</span>
+          {COMPLEXITY_TABLE.map((row) => (
+            <>
+              <span key={`${row.op}-op`} className="text-[9px] text-[hsl(210,8%,45%)] truncate">{row.op}</span>
+              <span key={`${row.op}-t`}  className={`text-[9px] font-mono font-bold ${row.accent} text-right`}>{row.time}</span>
+              <span key={`${row.op}-s`}  className="text-[9px] font-mono text-[hsl(210,8%,40%)] text-right">{row.space}</span>
+            </>
+          ))}
+        </div>
+      </div>
+    </footer>
+  )
+}

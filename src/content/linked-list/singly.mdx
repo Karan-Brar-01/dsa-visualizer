@@ -1,0 +1,49 @@
+---
+title: Singly Linked List
+category: Linked Lists
+complexity:
+  insertHead: { time: "O(1)", space: "O(1)" }
+  insertTail: { time: "O(n)", space: "O(1)" }
+  insertAt: { time: "O(n)", space: "O(1)" }
+  deleteHead: { time: "O(1)", space: "O(1)" }
+  deleteTail: { time: "O(n)", space: "O(1)" }
+  search: { time: "O(n)", space: "O(1)" }
+---
+
+## What is a Singly Linked List?
+
+A **singly linked list** is a linear data structure where each element (a **node**) holds two fields:
+a `value` and a `next` pointer that references the subsequent node. The last node's `next` is `null`.
+
+Unlike arrays, linked lists do not require contiguous memory allocation. Nodes are scattered
+across the heap; only the `next` pointer creates the logical sequence.
+
+## Key Operations
+
+| Operation      | Time Complexity | Notes |
+|---------------|-----------------|-------|
+| `insertHead`  | **O(1)**        | Allocate node, repoint head |
+| `insertTail`  | O(n)            | Must traverse to find current tail |
+| `insertAt`    | O(n)            | Walk to predecessor at index−1 |
+| `deleteHead`  | **O(1)**        | Advance head pointer |
+| `deleteTail`  | O(n)            | Must find second-to-last node |
+| `search`      | O(n)            | Linear scan from head |
+
+## Why O(1) for head insertion?
+
+Because we only need to:
+1. Allocate the new node (O(1))
+2. Set `newNode.next = head` (O(1))
+3. Update `head = newNode` (O(1))
+
+No traversal. No shifting. This is the linked list's primary advantage over arrays for
+prepend-heavy workloads.
+
+## The `next` pointer as a mathematical graph
+
+If you model the linked list as a directed graph G = (V, E), where V is the set of
+node IDs and E = { (v, next(v)) | v ∈ V, next(v) ≠ null }, then:
+
+- The graph is a **simple directed path** (or the empty graph).
+- It has exactly `n − 1` edges for a list of size `n`.
+- Finding the tail requires walking this path — O(n) — because there is no back-edge.

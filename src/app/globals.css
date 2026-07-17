@@ -1,0 +1,158 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Design tokens as CSS custom properties ────────────────────────────────── */
+
+:root {
+  /* Surface scale */
+  --surface: hsl(225, 20%, 6%);
+  --surface-raised: hsl(225, 18%, 9%);
+  --surface-overlay: hsl(225, 16%, 12%);
+  --surface-muted: hsl(225, 14%, 16%);
+
+  /* Borders */
+  --border: hsl(225, 12%, 18%);
+  --border-strong: hsl(225, 10%, 24%);
+
+  /* Text */
+  --text-primary: hsl(210, 20%, 92%);
+  --text-secondary: hsl(210, 12%, 65%);
+  --text-muted: hsl(210, 8%, 45%);
+
+  /* Node semantic states */
+  --node-idle: hsl(225, 14%, 20%);
+  --node-active: hsl(261, 82%, 65%);
+  --node-comparing: hsl(38, 92%, 60%);
+  --node-mutating: hsl(142, 72%, 52%);
+  --node-deleted: hsl(0, 72%, 55%);
+  --node-found: hsl(196, 90%, 55%);
+
+  /* Accent */
+  --accent-purple: hsl(261, 82%, 65%);
+  --accent-cyan: hsl(196, 90%, 55%);
+  --accent-amber: hsl(38, 92%, 60%);
+  --accent-green: hsl(142, 72%, 52%);
+  --accent-red: hsl(0, 72%, 55%);
+}
+
+/* ─── Base resets ────────────────────────────────────────────────────────────── */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  height: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  height: 100%;
+  min-height: 100dvh;
+  background-color: var(--surface);
+  color: var(--text-primary);
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-feature-settings: 'cv11', 'ss01';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Canvas grid background (applied on visualizer pages) ──────────────────── */
+
+.canvas-grid {
+  background-color: hsl(225, 20%, 5%);
+  background-image:
+    linear-gradient(hsl(225, 14%, 12%) 1px, transparent 1px),
+    linear-gradient(90deg, hsl(225, 14%, 12%) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* ─── React Flow overrides ───────────────────────────────────────────────────── */
+
+.react-flow {
+  background: transparent;
+}
+
+.react-flow__renderer {
+  z-index: 0;
+}
+
+.react-flow__controls {
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 24px hsl(0 0% 0% / 0.4);
+}
+
+.react-flow__controls-button {
+  background: var(--surface-raised);
+  border: none;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-secondary);
+  fill: var(--text-secondary);
+  transition: background 0.15s, fill 0.15s;
+}
+
+.react-flow__controls-button:hover {
+  background: var(--surface-overlay);
+  fill: var(--text-primary);
+}
+
+.react-flow__minimap {
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+/* ─── Scrollbar styling ──────────────────────────────────────────────────────── */
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--surface-raised);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* ─── Selection ──────────────────────────────────────────────────────────────── */
+
+::selection {
+  background: hsl(261, 82%, 65%, 0.3);
+  color: var(--text-primary);
+}
+
+/* ─── Utility: Glassmorphism panel ───────────────────────────────────────────── */
+
+.glass-panel {
+  background: hsl(225, 18%, 9%, 0.8);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid var(--border);
+}
+
+/* ─── Code blocks ────────────────────────────────────────────────────────────── */
+
+code, pre {
+  font-family: var(--font-jetbrains-mono), 'Fira Code', monospace;
+  font-feature-settings: 'liga' 1, 'calt' 1;
+}
+
+/* ─── Transitions ────────────────────────────────────────────────────────────── */
+
+.transition-node {
+  transition: background-color 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}

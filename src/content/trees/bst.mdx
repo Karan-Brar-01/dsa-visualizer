@@ -1,0 +1,20 @@
+---
+title: Binary Search Tree
+category: Trees
+complexity:
+  insert: { time: "O(log n)", space: "O(1)" }
+  search: { time: "O(log n)", space: "O(1)" }
+  delete: { time: "O(log n)", space: "O(1)" }
+---
+
+## What is a Binary Search Tree?
+
+A **Binary Search Tree (BST)** is a node-based binary tree data structure which has the following properties:
+
+1. The left subtree of a node contains only nodes with keys **less than** the node's key.
+2. The right subtree of a node contains only nodes with keys **greater than** the node's key.
+3. The left and right subtree each must also be a binary search tree.
+
+This property ensures that operations like search, insert, and delete can be performed in **O(log n)** time on average, as half of the remaining tree is eliminated at each step.
+
+However, in the worst case (e.g., when the tree is entirely skewed like a linked list), these operations degrade to **O(n)** time.

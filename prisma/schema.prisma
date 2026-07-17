@@ -1,0 +1,38 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ─── Content models ───────────────────────────────────────────────────────────
+
+/// A data structure or algorithm concept (e.g. "Singly Linked List")
+model Concept {
+  id          String   @id @default(cuid())
+  slug        String   @unique  // matches Next.js route segment
+  title       String
+  description String
+  category    Category
+  complexity  Json     // { insertHead: { time: "O(1)", space: "O(1)" }, ... }
+  mdxContent  String   // MDX body for the educational footer
+  codeSnippet Json     // { language: string, code: string }[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([slug])
+  @@index([category])
+}
+
+enum Category {
+  LINKED_LIST
+  TREE
+  GRAPH
+  SORTING
+  ARRAY
+}
