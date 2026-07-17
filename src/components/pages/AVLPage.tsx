@@ -57,12 +57,12 @@ export function AVLPage() {
   }, [isPlaying, play, pause, stepForward, stepBack, steps])
 
   return (
-    <div className={`flex flex-col ${isFullscreen ? 'h-[100dvh] relative' : 'h-[calc(100dvh-3.5rem)] md:h-full overflow-y-auto md:overflow-hidden'}`}>
+    <div className={`flex flex-col ${isFullscreen ? 'flex-1 relative' : 'h-[calc(100dvh-3.5rem)] md:h-full overflow-y-auto md:overflow-hidden'}`}>
       {/* Top Controls Bar */}
       <header
         className={
           isFullscreen
-            ? 'absolute bottom-4 pb-[env(safe-area-inset-bottom)] left-0 right-0 z-50 flex flex-col items-center justify-center px-4 pointer-events-none'
+            ? 'fixed bottom-4 pb-[env(safe-area-inset-bottom)] left-0 right-0 z-50 flex flex-col items-center justify-center px-4 pointer-events-none'
             : 'flex-shrink-0 border-b border-[hsl(225,12%,18%)] bg-[hsl(225,18%,10%)] px-4 py-2 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 z-10'
         }
       >
