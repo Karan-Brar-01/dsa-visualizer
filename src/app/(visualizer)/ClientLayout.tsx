@@ -4,9 +4,11 @@ import { useEffect } from 'react'
 import { Sidebar } from '@/components/layout/Sidebar'
 import { TopBar } from '@/components/layout/TopBar'
 import { useUIStore } from '@/stores/uiStore'
+import { useVisualViewport } from '@/hooks/useVisualViewport'
 
 export function ClientLayout({ children }: { children: React.ReactNode }) {
   const isFullscreen = useUIStore((s) => s.isFullscreen)
+  const viewportHeight = useVisualViewport()
 
   // iOS Safari keyboard bug fix: when an input loses focus, the page might stay scrolled
   useEffect(() => {
@@ -24,7 +26,7 @@ export function ClientLayout({ children }: { children: React.ReactNode }) {
 
 
   return (
-    <div className="fixed inset-0 flex bg-[hsl(225,20%,6%)] flex-col md:flex-row">
+    <div className="fixed inset-0 flex bg-[hsl(225,20%,6%)] flex-col md:flex-row" style={{ height: viewportHeight }}>
       {/* Left sidebar — navigation */}
       {!isFullscreen && (
         <div className="hidden md:flex">

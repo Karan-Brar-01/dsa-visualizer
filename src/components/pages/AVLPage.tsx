@@ -62,11 +62,11 @@ export function AVLPage() {
       <header
         className={
           isFullscreen
-            ? 'fixed bottom-4 pb-[env(safe-area-inset-bottom)] left-0 right-0 z-50 flex flex-col items-center justify-center px-4 pointer-events-none'
+            ? 'absolute bottom-4 pb-[env(safe-area-inset-bottom)] left-0 right-0 z-50 flex flex-col items-center justify-center px-4 pointer-events-none'
             : 'flex-shrink-0 border-b border-[hsl(225,12%,18%)] bg-[hsl(225,18%,10%)] px-4 py-2 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 z-10'
         }
       >
-        <div className={isFullscreen ? 'flex flex-col md:flex-row items-center justify-center gap-2 bg-[hsl(225,18%,10%)]/80 backdrop-blur-md rounded-2xl p-3 shadow-2xl border border-[hsl(225,12%,25%)] pointer-events-auto' : 'w-full flex flex-col md:flex-row items-start md:items-center justify-between gap-4'}>
+        <div className={isFullscreen ? 'flex flex-col md:flex-row items-center justify-center gap-2 bg-[hsl(225,18%,10%)]/80 backdrop-blur-md rounded-2xl p-3 shadow-2xl border border-[hsl(225,12%,25%)] pointer-events-auto max-h-[250px] overflow-y-auto w-full max-w-[90vw]' : 'w-full flex flex-col md:flex-row items-start md:items-center justify-between gap-4'}>
           <AVLOperationPanel />
           <AVLStepController />
         </div>
